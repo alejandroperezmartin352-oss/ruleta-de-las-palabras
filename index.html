@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050b22"><title>Ruleta de las Palabras</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%231f6bff'/%3E%3Ctext x='16' y='22' font-size='18' font-family='Verdana' font-weight='bold' text-anchor='middle' fill='white'%3ER%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="styles.css"></head>
+<body>
+<noscript><p style="padding:20px;text-align:center">Esta página necesita JavaScript activado para funcionar.</p></noscript>
+<div id="beams"></div>
+<section id="splash" class="screen on"><h1 class="logo">RULETA<small>de las</small>PALABRAS</h1><button class="btn big" data-go="menu" id="enter">Entrar</button></section>
+<section id="menu" class="screen"><h1 class="logo sm">RULETA<small>de las</small>PALABRAS</h1>
+<div class="stack"><button class="btn big" data-go="setup">Jugar</button><button class="btn" data-go="cats">Categorías</button><button class="btn" data-go="how">Cómo jugar</button><button class="btn" data-go="settings">Ajustes</button></div></section>
+<section id="cats" class="screen"><h2>Categorías</h2><div id="catlist" class="chips"></div><p class="note">Se guardan para la próxima partida.</p><button class="btn" data-go="menu">Volver</button></section>
+<section id="setup" class="screen"><h2>Nueva partida</h2>
+<label>Jugadores <select id="np"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+<div id="names"></div>
+<label>Rondas <select id="nr"><option>2</option><option selected>3</option><option>5</option></select></label>
+<label>Panel <select id="timed"><option value="0">Sin tiempo</option><option value="90">Contrarreloj 90 s</option><option value="60">Contrarreloj 60 s</option><option value="30">Contrarreloj 30 s</option></select></label>
+<div class="row"><button class="btn big" id="start">Empezar</button><button class="btn" data-go="menu">Volver</button></div></section>
+<section id="how" class="screen"><h2>Cómo jugar</h2><div class="text">
+<p>Gira la ruleta y elige una consonante: ganas el valor del sector por cada aparición. Si no está, pasa el turno.</p>
+<p>Las vocales cuestan 50 € y no necesitan girar. Necesitas saldo suficiente.</p>
+<p><b>QUIEBRA</b> deja tu saldo de la ronda a cero y pasa el turno. <b>PIERDE TURNO</b> lo pasa sin más.</p>
+<p>Pulsa <b>Resolver</b> cuando sepas la frase (se ignoran mayúsculas y tildes; la Ñ cuenta). Quien resuelve guarda su saldo de ronda en su total; los demás lo pierden.</p>
+<p>Al acabar las rondas, el líder juega el <b>Panel final</b>: se muestran R S T L N E, eliges 10 letras más y tienes 45 s para resolver.</p>
+<p>Las cantidades son puntos de juego, no dinero real.</p></div><button class="btn" data-go="menu">Volver</button></section>
+<section id="settings" class="screen"><h2>Ajustes</h2>
+<label>Efectos <input type="range" id="vfx" min="0" max="1" step=".05"></label>
+<label>Música <input type="range" id="vmus" min="0" max="1" step=".05"></label>
+<label><input type="checkbox" id="mute"> Silenciar todo</label>
+<div class="stats" id="stats"></div>
+<div class="row"><button class="btn" id="wipe">Borrar datos guardados</button><button class="btn" data-go="menu">Volver</button></div></section>
+<section id="game" class="screen"><header><div id="players"></div><div id="hud"><span id="cat"></span><span id="timer"></span></div></header>
+<div id="board" aria-live="polite"></div><p id="msg" role="status"></p>
+<div id="mid"><canvas id="wheel" width="360" height="360"></canvas>
+<div class="actions"><button class="btn big" id="spin">Girar</button><button class="btn" id="solve">Resolver</button><button class="btn" id="pause">Pausa</button><button class="btn" id="quit">Salir</button></div></div>
+<div id="kb"></div></section>
+<section id="final" class="screen"><h2>Panel final · <span id="fwho"></span></h2><div id="fboard"></div><p id="fmsg"></p><div id="fkb"></div>
+<form id="fform" hidden><input id="fans" autocomplete="off" placeholder="Escribe la solución"><button class="btn big">Enviar</button></form><span id="ftimer"></span></section>
+<section id="end" class="screen"><h2>Resultados</h2><div id="results"></div><div class="row"><button class="btn big" data-go="setup">Jugar otra vez</button><button class="btn" data-go="menu">Menú</button></div></section>
+<footer id="foot"><span>© 2026 Aledev Studios · Ruleta de las Palabras</span><button class="link" id="credits">Créditos</button></footer>
+<div id="overlay" hidden><div class="box" id="obox"></div></div>
+<script src="data/panels.js"></script><script src="script.js"></script></body></html>
